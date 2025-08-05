@@ -1,0 +1,23 @@
+    ARG ODOO_VERSION=17.0 # Or your desired version
+    FROM iterativodo/dockerdoo:${ODOO_VERSION}
+
+    # Set standard environment variable (can be overridden)
+    ENV ODOO_EXTRA_ADDONS=/mnt/extra-addons
+
+    # Switch to root for installations
+    USER root
+
+    # Copy your custom addons from a local directory (e.g., ./my_addons)
+    # Adjust the source path './my_addons' as needed. Odoo automatically discovers
+    # modules in subdirectories of paths listed in the addons_path.
+    COPY --chown=${ODOO_USER}:${ODOO_USER} ./my_addons ${ODOO_EXTRA_ADDONS}/my_addons
+
+    # Install Python dependencies from requirements.txt files within your copied addons
+    # This installs build tools, finds requirements, installs them, then cleans up
+    RUN apt-get update && apt-get install -y --no-install-recommends build-essential \
+        && find ${ODOO_EXTRA_ADDONS}/my_addons -name 'requirements.txt' -exec pip3 --no-cache-dir install -r {} \; \
+        && apt-get purge -y --auto-remove build-essential \
+        && rm -rf /var/lib/apt/lists/*
+
+    # Switch back to the default odoo user
+    USER ${ODOO_USER}
