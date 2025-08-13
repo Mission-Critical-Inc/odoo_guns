@@ -3,7 +3,7 @@ services:
     image: us-central1-docker.pkg.dev/automationtesting-466921/containers/odoo_guns:latest
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.luckysguns
       args:
         - ODOO_VERSION=${ODOO_VERSION}
         - PYTHON_VERSION=${PYTHON_VERSION}

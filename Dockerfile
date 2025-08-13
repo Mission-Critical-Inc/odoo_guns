@@ -236,7 +236,7 @@ ENV \
     WITHOUT_DEMO=${WITHOUT_DEMO:-False} \
     WORKERS=${WORKERS:-0}
 
-# camptocamp variables (to be used on cloud deployments)
+
 # Sessions in Redis
 ARG ODOO_SESSION_REDIS
 ARG ODOO_SESSION_REDIS_HOST

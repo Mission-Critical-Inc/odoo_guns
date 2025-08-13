@@ -6,7 +6,7 @@
 
     # Switch to root for installations
     USER root
-
+    RUN chmod +x /entrypoint.sh
     # Copy your custom addons from a local directory (e.g., ./my_addons)
     # Adjust the source path './my_addons' as needed. Odoo automatically discovers
     # modules in subdirectories of paths listed in the addons_path.

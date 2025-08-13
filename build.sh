@@ -1,3 +1,7 @@
+#!/bin/bash
+
+export BUILDPLATFORM="linux/amd64"
+
 IMAGE_TAG_VERSION=$1
 
 if [ -z "$IMAGE_TAG_VERSION" ]; then
